@@ -6,8 +6,12 @@
 # If the string length is less than 3, leave it unchanged.
 # Return the resulting string.
 def verbing(s):
-  # +++your code here+++
-  return
+  if len(s) >=3:
+    return  s + 'ly' if s.endswith('ing') else s+'ing'
+  else:
+    return s
+
+
 
 
 # E. not_bad
@@ -18,10 +22,11 @@ def verbing(s):
 # Return the resulting string.
 # So 'This dinner is not that bad!' yields:
 # This dinner is good!
+import re
 def not_bad(s):
-  # +++your code here+++
-  return
 
+  return re.sub(pattern=r'not [^.]+ bad',repl='good',string=s,flags=re.IGNORECASE)
+print(not_bad('This dinner is not that bad!'))
 
 # F. front_back
 # Consider dividing a string into two halves.
@@ -31,8 +36,21 @@ def not_bad(s):
 # Given 2 strings, a and b, return a string of the form
 #  a-front + b-front + a-back + b-back
 def front_back(a, b):
-  # +++your code here+++
-  return
+  if len(a)%2 == 0:
+    af=a[:len(a)//2]
+    ab=a[len(a)//2:]
+  else:
+    af=a[:( (len(a)-1)//2)+1]
+    ab=a[( (len(a)-1)//2)+1:]
+  if len(b)%2 == 0:
+    bf=b[:len(b)//2]
+    bb=b[len(b)//2:]
+  else:
+    bf=b[:( (len(b)-1)//2)+1]
+    bb=b[( (len(b)-1)//2)+1:]
+  return af+bf+ab+bb
+
+print(front_back('abcde','wxyz'))
 
 
 # Simple provided test() function used in main() to print
@@ -42,26 +60,26 @@ def test(got, expected):
     prefix = ' OK '
   else:
     prefix = '  X '
-  print '%s got: %s expected: %s' % (prefix, repr(got), repr(expected))
+  print( '%s got: %s expected: %s' % (prefix, repr(got), repr(expected)))
 
 
 # main() calls the above functions with interesting inputs,
 # using the above test() to check if the result is correct or not.
 def main():
-  print 'verbing'
+  print( 'verbing')
   test(verbing('hail'), 'hailing')
   test(verbing('swiming'), 'swimingly')
   test(verbing('do'), 'do')
 
-  print
-  print 'not_bad'
+
+  print( 'not_bad')
   test(not_bad('This movie is not so bad'), 'This movie is good')
   test(not_bad('This dinner is not that bad!'), 'This dinner is good!')
   test(not_bad('This tea is not hot'), 'This tea is not hot')
   test(not_bad("It's bad yet not"), "It's bad yet not")
 
-  print
-  print 'front_back'
+
+  print ('front_back')
   test(front_back('abcd', 'xy'), 'abxcdy')
   test(front_back('abcde', 'xyz'), 'abcxydez')
   test(front_back('Kitten', 'Donut'), 'KitDontenut')
