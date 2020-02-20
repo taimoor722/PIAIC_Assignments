@@ -35,7 +35,6 @@ columns, so the output looks better.
 
 import random
 import sys
-filename='small.txt'
 
 def mimic_dict(filename):
   """Returns mimic dict mapping each word to list of words which follow it."""
@@ -61,7 +60,6 @@ def print_mimic(mimic_dict, word):
   words=random.choices(text_dict[word],k=200)
   return print(' '.join(words))
 
-# print_mimic(mimic_dict(filename),'not')
 
 # Provided main(), calls mimic_dict() and mimic()
 def main():
