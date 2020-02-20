@@ -35,24 +35,38 @@ columns, so the output looks better.
 
 import random
 import sys
-
+filename='small.txt'
 
 def mimic_dict(filename):
   """Returns mimic dict mapping each word to list of words which follow it."""
-  # +++your code here+++
-  return
+  with open(filename) as f:
+    text = f.read().lower().strip().replace('\n', ' ').split(' ')
+    # print(text)
+    text_dic = dict()
+    for index, word in enumerate(text):
+      # print(index,word)
+      text_dic[word] = text[index + 1:]
+      # print(text_dic)
+    # print(text_dic[''])
+  return text_dic
 
 
 def print_mimic(mimic_dict, word):
+  if word not in mimic_dict.keys():
+    word=''
+  else:
+    word=word
   """Given mimic dict and start word, prints 200 random words."""
-  # +++your code here+++
-  return
+  text_dict=mimic_dict
+  words=random.choices(text_dict[word],k=200)
+  return print(' '.join(words))
 
+# print_mimic(mimic_dict(filename),'not')
 
 # Provided main(), calls mimic_dict() and mimic()
 def main():
   if len(sys.argv) != 2:
-    print 'usage: ./mimic.py file-to-read'
+    print ('usage: ./mimic.py file-to-read')
     sys.exit(1)
 
   dict = mimic_dict(sys.argv[1])
